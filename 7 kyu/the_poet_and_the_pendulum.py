@@ -44,7 +44,8 @@
 #
 #     The Next higher number goes to the left of -10 , and So on .
 #
-#     Remeber , In Even array size , The minimum element moved to (n-1)/2 index (considering that indexes start from 0) .
+#     Remeber , In Even array size , The minimum element moved to (n-1)/2
+#     index (considering that indexes start from 0) .
 #
 # pendulum ([11, -16, -18, 13, -11, -12, 3, 18]) ==> [13, 3, -12, -18, -16, -11, 11, 18]
 #
@@ -56,7 +57,8 @@
 #
 #     The Next higher number goes to the left of -18 , and So on .
 #
-#     Remember , In Even array size , The minimum element moved to (n-1)/2 index (considering that indexes start from 0) .
+#     Remember , In Even array size , The minimum element moved to (n-1)/2 
+#     index (considering that indexes start from 0) .
 
 # My solution:
 def pendulum(values):
