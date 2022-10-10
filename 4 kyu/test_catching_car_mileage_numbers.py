@@ -64,3 +64,8 @@ def test_return_1_if_close_to_interesting_number():
     awesome_phrases = [1337, 256]
     for number in numbers:
         assert is_interesting(number, awesome_phrases) == 1
+
+def test_98_and_99_returns_1():
+    numbers = [98, 99]
+    for number in numbers:
+        assert is_interesting(number, []) == 1

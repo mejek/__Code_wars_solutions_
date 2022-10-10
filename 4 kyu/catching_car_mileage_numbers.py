@@ -52,62 +52,55 @@
 #
 # My solution created in TTD way:
 
-#code to improve
+# functions checking each condition
+def check_awesome_phrase(number, ap):
+    if number in ap:
+        return True
+    return False
+
+def check_followed_by_all_zeros(number):
+    if list(set(str(number)[1:])) == ['0']:
+        return True
+    return False
+
+def check_boring_number_range(number):
+    if number < 98 or number > 1000000000:
+        return False
+    return True
+
+def check_every_digit_is_the_same_number(number):
+    if all(str(number)[0] == x for x in str(number)):
+        return True
+    return False
+
+def check_digits_are_sequential_incrementing(number):
+    if str(number) in '1234567890':
+        return True
+    return False
+
+def check_digits_are_sequential_decreasing(number):
+    if str(number) in '9876543210':
+        return True
+    return False
+
+def check_digits_are_palindrome(number):
+    if str(number) == str(number)[::-1]:
+        return True
+    return False
 
 def is_interesting(number, awesome_phrases):
-    #number less than 100 or bigger than 1 000 000 000
-    if number < 98 or number > 1000000000:
-        return 0
-
-    if number == 98 or number == 99:
-        return 1
-
-    #awesome_phrases
-    if awesome_phrases != []:
-        for ap in awesome_phrases:
-            if ap == number:
-                return 2
-            elif ap - 1 == number or ap - 2 == number:
-                return 1
-
-    #the same digits
-    if all(str(number)[0] == x for x in str(number)):
-        return 2
-    if all(str(number+1)[0] == x for x in str(number+1)) or all(str(number+2)[0] == x for x in str(number+2)):
-        return 1
-
-    #followed by all zeros
-    if list(set(str(number)[1:])) == ['0']:
-        return 2
-    elif all(x == '0' for x in str(number+1)[1:]) or all(x == '0' for x in str(number+2)[1:]):
-        return 1
-
-    #sequential incrementing
-    inc_seq = '1234567890'
-    if str(number) in inc_seq:
-        return 2
-    elif str(number+1) in inc_seq or str(number+2) in inc_seq:
-        return 1
-
-    #sequential decreasing
-    dec_seq = '9876543210'
-    if str(number) in dec_seq:
-        return 2
-    elif str(number + 1) in dec_seq or str(number + 2) in dec_seq:
-        return 1
-
-    #palindrome
-    str_l = len(str(number))
-    if str_l % 2 == 0:
-        if str(number)[:int(str_l/2)] == str(number)[int(str_l/2):][::-1]:
-            return 2
-        if str(number+1)[:int(str_l/2)] == str(number+1)[int(str_l/2):][::-1] or \
-                str(number+2)[:int(str_l/2)] == str(number+2)[int(str_l/2):][::-1]:
+    if check_boring_number_range(number):
+        if number == 98 or number == 99:
             return 1
-    else:
-        if str(number)[:int(str_l/2)] == str(number)[int(str_l/2)+1:][::-1]:
-            return 2
-        if str(number+1)[:int(str_l/2)] == str(number+1)[int(str_l/2)+1:][::-1] or \
-                str(number+2)[:int(str_l/2)] == str(number+2)[int(str_l/2)+1:][::-1]:
-            return 1
+        for n in [0, 1, 2]:
+            if check_awesome_phrase(number + n, awesome_phrases) or \
+                    check_followed_by_all_zeros(number + n) or \
+                    check_every_digit_is_the_same_number(number + n) or\
+                    check_digits_are_sequential_incrementing(number + n) or \
+                    check_digits_are_sequential_decreasing(number + n) or \
+                    check_digits_are_palindrome(number + n):
+                if n == 0:
+                    return 2
+                else:
+                    return 1
     return 0
